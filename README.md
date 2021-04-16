@@ -93,3 +93,7 @@ There is also `yarn release:minor`, `yarn release:patch` and `yarn realease:majo
 All material is provided under an MIT License unless otherwise specified.
 
 MIT License: <https://mit-license.org/> or see the [`LICENSE`](https://github.com/tomasanchez/c-project/blob/master/LICENSE) file.
+
+## Credits
+
+This project has been facilitated with 💙 by [Tomás Sánchez](https://github.com/tomasanchez).
