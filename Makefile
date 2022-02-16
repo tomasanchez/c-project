@@ -6,7 +6,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -g3
 LIBS =
 INCLUDES = -I ./include/
-SOURCES = ./src/*.c
+SOURCES = $(shell find ./src -name '*.c')
 
 OUTPUT = build/a.exe
 LEAKS = log/leaks.log
@@ -15,6 +15,11 @@ HELGRIND = log/threads.log
 all : compile run
 
 .PHONY: all
+
+install:
+	@echo Installing dependencies...
+# Install required libraries here.
+	@echo Installed
 
 compile:
 	@mkdir -p build
