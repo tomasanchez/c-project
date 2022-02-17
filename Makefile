@@ -50,7 +50,7 @@ dirs:
 
 compile:
 	@mkdir -p build
-	@Echo Building...
+	@echo Building...
 	$(CC) $(CFLAGS) $(MAIN_FILE) $(SOURCES) $(INCLUDES) $(LIBS) -o $(OUTPUT)
 	@echo Build completed.
 
