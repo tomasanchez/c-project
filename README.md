@@ -8,16 +8,26 @@ project
 │   Makefile
 │
 └───src
-│   *.c
+│   │
+│   └─ app
+│   │  main.c
+│   │
+│   └─ folder
+│   |  *.c
+│   └─ another_folder
+│       *.c
 │
 └───include
-|    *.h
-|
+│   │
+│   └─ folder
+│       *.h
+│    *.h
+│
 └───log
 |   *.log
 |
 └───build
-    *.exe
+    *.out
 ```
 
 ## Commands
@@ -26,7 +36,7 @@ project
 - **compile**: `make compile` compiles source files
 - **run**: `make run` executes the program
 - **leaks**: `make leaks` runs `compile` and runs the program in Valgrind, loggin the result in `log/leaks.log`
-- **thbreads**: `make threads` runs `compile` and runs the program in Valgrind with the tool `Hellgrind`
+- **threads**: `make threads` runs `compile` and runs the program in Valgrind with the tool `Hellgrind`
 - **clean**: deletes executable
 - **cleanLogs**: deletes the `log` folder
 - **remove**: runs `clean` and `cleanLogs`
