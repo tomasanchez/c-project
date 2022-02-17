@@ -18,4 +18,7 @@ jobs:
       run: make install
 
     - name: Build application
-      run: make compile    
+      run: make compile
+
+    - name: Verify
+      run: make test
