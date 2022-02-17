@@ -5,10 +5,29 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "C Test",
+      "name": "C",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/build/a.exe",
+      "program": "${workspaceFolder}/build/a.out",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${workspaceFolder}",
+      "environment": [],
+      "externalConsole": false,
+      "MIMode": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    },
+    {
+      "name": "C-Test",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/a_test.out",
       "args": [],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
