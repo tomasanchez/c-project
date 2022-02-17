@@ -2,15 +2,39 @@
 # Modified version of Makefile using g++ & gdb by Roberto Nicolas Savinelli <rsavinelli@est.frba.utn.edu.ar>
 # Tomas Agustin Sanchez <tosanchez@est.frba.utn.edu.ar>
 
+# C Compiler
 CC = gcc
+# Compiler Flags
 CFLAGS = -Wall -Wextra -g3
+# Test Compiler flags
+TCFLAGS = -Wall -Wextra -Wshadow -Wno-unused-variable -Wno-unused-function -Wno-unused-result -Wno-unused-variable -Wno-pragmas -O3 -g3
+# Used libraries
 LIBS =
-INCLUDES = -I ./include/
-SOURCES = $(shell find ./src -name '*.c')
-
-OUTPUT = build/a.exe
+# Include directory
+INCLUDE_DIRECTORY=./include/
+# Source directory
+SOURCE_DIRECTORY=./src
+# Test Directory
+TEST_DIRECTORY=./test
+# The main file path
+MAIN_FILE= ./src/app/main.c
+# Inlcude folder
+INCLUDES = $(foreach dir, $(shell find $(INCLUDE_DIRECTORY) -type d -print), $(addprefix -I , $(dir)))
+# Source files
+SOURCES = $(filter-out $(MAIN_FILE), $(shell find $(SOURCE_DIRECTORY) -name '*.c'))
+# Test cases files
+TESTS = $(shell find $(TEST_DIRECTORY) -name '*.c')
+# Application name
+APPNAME = a
+# Output file name
+OUTPUT = build/$(APPNAME).out
+# Test Output file
+TEST_OUTPUT = build/$(APPNAME)_test.out
+# Leaks log file
 LEAKS = log/leaks.log
+# Thread chek log file
 HELGRIND = log/threads.log
+
 
 all : compile run
 
@@ -21,15 +45,26 @@ install:
 # Install required libraries here.
 	@echo Installed
 
+dirs: 
+	@echo $(DIRS)
+
 compile:
 	@mkdir -p build
-	$(CC) $(CFLAGS) $(SOURCES) $(INCLUDES) $(LIBS) -o $(OUTPUT)
+	@Echo Building...
+	$(CC) $(CFLAGS) $(MAIN_FILE) $(SOURCES) $(INCLUDES) $(LIBS) -o $(OUTPUT)
+	@echo Build completed.
 
 run: compile
 	./$(OUTPUT)
 
-debug: compile 
-	gdb -se $(OUTPUT)
+test-build:
+	@mkdir -p build
+	@echo Preparing tests...
+	$(CC) $(TCFLAGS) $(TESTS) $(SOURCES) $(INCLUDES) $(LIBS) -o $(TEST_OUTPUT)
+
+test: test-build
+	./$(TEST_OUTPUT)
+	@echo Tests completed.
 	
 leaks: compile
 	@mkdir -p log
